@@ -44,11 +44,53 @@ char *copy_str(char *inStr, short len)
   char *copy_str = (char *)malloc((len +1) *sizeof(char));
 
   for(short i = 0; i < len; i++){
-    copy_str[1]
+    copy_str[1] = inStr[i];
+  }
+  copy_str[len] = '\0';
+  return copy_str;
+  
 }
 
-char **tokenize(char *str);
+char **tokenize(char *str)
+{
+  int count = count_tokens(str);
+  char **tokens = (char **)malloc((count+1) * sizeof(char *));
+  if (!tokens) return NULL;
+  int t_index = 0;
+  char *token = token_start(str);
 
-void print_tokens(char **tokens);
+  while (token != NULL){
+    char *end_token = token_terminator(token);
+    int len = end_token - token;
+    tokens[t_index] = copy_str(token, len);
 
-void free_tokens(char **tokens);
+    if (tokens[t_index] == NULL){
+      printf("copy fail");
+      return NULL;
+    }
+    t_index++;
+    token = token_start(end_token);
+  }
+  tokens[t_index] = NULL;
+  return tokens;
+
+}
+
+void print_tokens(char **tokens)
+{
+  int i=0;
+  while (tokens[i] != NULL){
+    printf("tokens[%d] = '%s'\n", i, tokens[i]);
+    i++;
+  }
+}
+
+void free_tokens(char **tokens)
+{
+  int i = 0;
+  while (tokens[i] != NULL){
+    free(tokens[i]);
+    i++;
+  }
+  free(tokens);
+}
