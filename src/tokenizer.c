@@ -1,5 +1,6 @@
 #include "tokenizer.h"
-#include "stdlib.h"
+#include <stdlib.h>
+#include <stdio.h>
 
 
 int space_char(char c)
@@ -17,7 +18,7 @@ char *token_start(char *str)
   while (*str != '\0' && space_char(*str)){
     str++;
   }
-  return (*str == '\0') ? NULL : str;
+  return (*str != '\0') ? str : NULL;
 }
 
 char *token_terminator(char *token)
@@ -25,14 +26,14 @@ char *token_terminator(char *token)
   while (non_space_char(*token)){
     token++;
   }
-  return token
+  return token;
 }
 
 int count_tokens(char *str)
 {
   int count = 0;
-    char *token = token_start(str);
-  while (non_space_char(*token)){
+  char *token = token_start(str);
+  while (token != NULL){
     count++;
     token = token_start(token_terminator(token));
   }
@@ -41,7 +42,7 @@ int count_tokens(char *str)
 
 char *copy_str(char *inStr, short len)
 {
-  char *copy_str = (char *)malloc((len +1) *sizeof(char));
+  char *copy_str = (char *)malloc((len +1) * sizeof(char));
 
   for(short i = 0; i < len; i++){
     copy_str[1] = inStr[i];
@@ -80,7 +81,7 @@ void print_tokens(char **tokens)
 {
   int i=0;
   while (tokens[i] != NULL){
-    printf("tokens[%d] = '%s'\n", i, tokens[i]);
+    printf("tokens[%d] = '%s' length of '%d' \n", i, tokens[i]);
     i++;
   }
 }

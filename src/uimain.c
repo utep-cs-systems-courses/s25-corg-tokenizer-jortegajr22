@@ -11,5 +11,10 @@ int main()
   fgets(input, sizeof(input), stdin);
 
   printf("You entered: %s \n", input);
+  
+  char **tokens = tokenize(input);
+  print_tokens(tokens);
+  //  free_tokens(tokens);
+  
   return 0;
 }
