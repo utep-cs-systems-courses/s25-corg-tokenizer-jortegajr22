@@ -81,7 +81,7 @@ void print_tokens(char **tokens)
 {
   int i=0;
   while (tokens[i] != NULL){
-    printf("tokens[%d] = '%s' length of '%d' \n", i, tokens[i]);
+    printf("tokens[%d] = '%s'\n", i, tokens[i]);
     i++;
   }
 }
