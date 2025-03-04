@@ -45,7 +45,7 @@ char *copy_str(char *inStr, short len)
   char *copy_str = (char *)malloc((len +1) * sizeof(char));
 
   for(short i = 0; i < len; i++){
-    copy_str[1] = inStr[i];
+    copy_str[i] = inStr[i];
   }
   copy_str[len] = '\0';
   return copy_str;
