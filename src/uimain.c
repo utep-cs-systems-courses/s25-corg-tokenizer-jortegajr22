@@ -28,28 +28,23 @@ int main()
       print_history(history);
       continue;
     }
-    if (input[0] == 'h' && input[1] == 'i' && input[2] == 's' && input[3]
-	== 't' && input[4] == 'o' && input[5]== 'r' && input[6] == 'y'){
-      int id = get_id(&input[8]);
-      
-      if (input[7] == ' '){
+    if (input[0] == '!'){
 
-	if (id >= 0){
-	  char *item = get_history(history, id);
-	  if (item){
-	    printf("%d %s\n", id, item);
-	  } else{
-	    printf("No history entry found for ID %d.\n", id);
-	  }
-	} else{
-	  printf("Invalid Id format.\n");
-	}
-      } else{
-	printf("Invalid format. Use 'history #'");
+	if (!(input[1] == ' ')){
+	  int id = get_id(&input[1]);
+
+	  if (id >= 0){
+	    char *item = get_history(history, id);
+
+	    if (item){
+	      printf("%d %s\n", id, item);
+	    } else{ printf("No history entry found for ID %d.\n", id); }
+
+	  } else{  printf("Invalid Id format.\n"); }
+	} else{ printf("Invalid format. Use '!#'"); }
+	continue;
       }
-      continue;
-    }
-
+      
     char **tokens = tokenize(input);
     print_tokens(tokens);
     free_tokens(tokens);
